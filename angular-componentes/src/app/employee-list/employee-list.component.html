@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <h1 class="display-5">Employee List</h1>
+
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="openModal()">
+        New Employee
+      </button>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Salary</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let employee of employeeService.employees; let i = index"
+          [id]="'tr' + (i + 1)"
+        >
+          <td [innerHtml]="employee.name"></td>
+          <td [innerHtml]="employee.salary" salaryColor="{{ employee.salary }}">
+            {{ employee.salary }}
+          </td>
+          <!-- <td [innerHtml]="employee.salary" [ngClass]="colorSalary(employee)">
+            {{ employee.salary }}
+          </td> -->
+          <td [innerHtml]="employee.bonus"></td>
+          <!-- <td  [style.color]="getSalaryColor(employee)">{{employee.salary}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<employee-new-model></employee-new-model>

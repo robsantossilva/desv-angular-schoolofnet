@@ -1,0 +1,25 @@
+<span>
+  <label for="nome">Name: </label>
+  <input type="text" [(ngModel)]="name"> <!-- [(ngModel)] Two way data binding -->
+  <br/>
+</span>
+
+<span>
+  <label for="nome">Salary: </label>
+  <input type="number" [(ngModel)]="salary">
+  <br/>
+</span>
+
+<!-- <span *ngIf="shouldReceiveBonus(salary)">
+  <label for="nome">Bonus: </label>
+  <input type="number" [(ngModel)]="bonus">
+  <br/>
+</span> -->
+
+<span [hidden]="!employeeService.shouldReceiveBonus(salary)">
+  <label for="nome">Bonus: </label>
+  <input type="number" [(ngModel)]="bonus">
+  <br/>
+</span>
+
+<button type="button" (click)="addEmployee($event)">Add Employee</button>
