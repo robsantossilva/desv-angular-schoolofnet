@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -9,18 +10,18 @@ import { Employee, EmployeeService } from '../employee.service';
 import * as bootstrap from 'bootstrap';
 
 @Component({
-  selector: 'employee-new-model',
-  templateUrl: './employee-new-model.component.html',
-  styleUrls: ['./employee-new-model.component.css'],
+  selector: 'employee-delete-model',
+  templateUrl: './employee-delete-model.component.html',
+  styleUrls: ['./employee-delete-model.component.css'],
 })
-export class EmployeeNewModelComponent implements OnInit {
-  name: string = '';
-  salary: number = 0;
-  bonus: number = 0;
+export class EmployeeDeleteModelComponent implements OnInit {
+  @Input()
+  employee!: Employee;
+
   bootstrapModal!: bootstrap.Modal;
 
   @Output()
-  onSubmit: EventEmitter<Employee> = new EventEmitter<Employee>();
+  onDeleteEmployee: EventEmitter<Employee> = new EventEmitter<Employee>();
 
   constructor(
     private element: ElementRef,
@@ -33,22 +34,9 @@ export class EmployeeNewModelComponent implements OnInit {
     });
   }
 
-  addEmployee(): void {
-    const newEmployee: Employee = {
-      name: this.name,
-      salary: this.salary,
-      bonus: this.bonus,
-    };
-
-    this.employeeService.addEmployee(newEmployee);
-
-    this.name = '';
-    this.salary = 0;
-    this.bonus = 0;
-
-    this.onSubmit.emit(newEmployee);
-
-    this.hide();
+  deleteEmployee(): void {
+    this.employeeService.deleteEmployee(this.employee);
+    this.onDeleteEmployee.emit(this.employee);
   }
 
   hide(): void {

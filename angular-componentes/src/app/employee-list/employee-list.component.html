@@ -1,9 +1,13 @@
 <div class="container">
+  <alert-success [hidden]="!showMessageSuccess">
+    Employee <strong>{{ employee?.name }}</strong> created successfully
+  </alert-success>
+
   <div class="row">
     <h1 class="display-5">Employee List</h1>
 
     <div class="col-md-12">
-      <button class="btn btn-primary" (click)="openModal()">
+      <button class="btn btn-primary" (click)="openNewModal()">
         New Employee
       </button>
     </div>
@@ -13,7 +17,8 @@
         <tr>
           <th>Name</th>
           <th>Salary</th>
-          <th>Salary</th>
+          <th>Bonus</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -21,8 +26,11 @@
           *ngFor="let employee of employeeService.employees; let i = index"
           [id]="'tr' + (i + 1)"
         >
-          <td [innerHtml]="employee.name"></td>
-          <td [innerHtml]="employee.salary" salaryColor="{{ employee.salary }}">
+          <td [innerHtml]="employee.name | uppercase"></td>
+          <td
+            [innerHtml]="employee.salary | myCurrency"
+            salaryColor="{{ employee.salary }}"
+          >
             {{ employee.salary }}
           </td>
           <!-- <td [innerHtml]="employee.salary" [ngClass]="colorSalary(employee)">
@@ -30,10 +38,39 @@
           </td> -->
           <td [innerHtml]="employee.bonus"></td>
           <!-- <td  [style.color]="getSalaryColor(employee)">{{employee.salary}}</td> -->
+
+          <td>
+            <div class="d-grid gap-2 d-md-block">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="openEditModal(employee)"
+              >
+                Edit
+              </button>
+              |
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="openDeleteModal(employee)"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<employee-new-model></employee-new-model>
+<employee-new-model (onSubmit)="onNewEmployee($event)"></employee-new-model>
+<employee-edit-model
+  [employee]="employeeToEdit"
+  (onSubmit)="onEditEmployee($event)"
+></employee-edit-model>
+
+<employee-delete-model
+  [employee]="employeeToDelete"
+  (onDeleteEmployee)="onDeleteEmployee($event)"
+></employee-delete-model>
