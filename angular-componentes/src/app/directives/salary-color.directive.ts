@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input } from '@angular/core';
-import { EmployeeService } from './employee.service';
+import { EmployeeService } from '../services/employee.service';
 
 @Directive({
   selector: '[salaryColor]',

@@ -3,14 +3,15 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { EmployeeNewComponent } from './employee-new/employee-new.component';
-import { SalaryColorDirective } from './salary-color.directive';
-import { EmployeeNewModelComponent } from './employee-new-model/employee-new-model.component';
-import { EmployeeEditModelComponent } from './employee-edit-model/employee-edit-model.component';
-import { EmployeeDeleteModelComponent } from './employee-delete-model/employee-delete-model.component';
-import { AlertSuccessComponent } from './alert-success/alert-success.component';
-import { MyCurrencyPipe } from './my-currency.pipe';
+
+import { SalaryColorDirective } from './directives/salary-color.directive';
+import { AlertSuccessComponent } from './components/alert-success/alert-success.component';
+import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { EmployeeNewComponent } from './components/employee-new/employee-new.component';
+import { EmployeeNewModelComponent } from './components/employee-new-model/employee-new-model.component';
+import { EmployeeEditModelComponent } from './components/employee-edit-model/employee-edit-model.component';
+import { EmployeeDeleteModelComponent } from './components/employee-delete-model/employee-delete-model.component';
+import { MyCurrencyPipe } from './pipes/my-currency.pipe';
 
 @NgModule({
   declarations: [

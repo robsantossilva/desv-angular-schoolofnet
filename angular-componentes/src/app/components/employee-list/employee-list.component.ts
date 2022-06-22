@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Employee, EmployeeService } from '../../services/employee.service';
 import { EmployeeDeleteModelComponent } from '../employee-delete-model/employee-delete-model.component';
 import { EmployeeEditModelComponent } from '../employee-edit-model/employee-edit-model.component';
 import { EmployeeNewModelComponent } from '../employee-new-model/employee-new-model.component';
-import { Employee, EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'employee-list',

@@ -5,8 +5,9 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Employee, EmployeeService } from '../employee.service';
+
 import * as bootstrap from 'bootstrap';
+import { Employee, EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'employee-new-model',

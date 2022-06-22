@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Employee, EmployeeService } from '../employee.service';
+import { Employee, EmployeeService } from '../../services/employee.service';
 import * as bootstrap from 'bootstrap';
 
 @Component({
