@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -9,14 +10,14 @@ import { Employee, EmployeeService } from '../employee.service';
 import * as bootstrap from 'bootstrap';
 
 @Component({
-  selector: 'employee-new-model',
-  templateUrl: './employee-new-model.component.html',
-  styleUrls: ['./employee-new-model.component.css'],
+  selector: 'employee-edit-model',
+  templateUrl: './employee-edit-model.component.html',
+  styleUrls: ['./employee-edit-model.component.css'],
 })
-export class EmployeeNewModelComponent implements OnInit {
-  name: string = '';
-  salary: number = 0;
-  bonus: number = 0;
+export class EmployeeEditModelComponent implements OnInit {
+  @Input()
+  employee!: Employee;
+
   bootstrapModal!: bootstrap.Modal;
 
   @Output()
@@ -34,20 +35,8 @@ export class EmployeeNewModelComponent implements OnInit {
   }
 
   addEmployee(): void {
-    const newEmployee: Employee = {
-      name: this.name,
-      salary: this.salary,
-      bonus: this.bonus,
-    };
-
-    this.employeeService.addEmployee(newEmployee);
-
-    this.name = '';
-    this.salary = 0;
-    this.bonus = 0;
-
-    this.onSubmit.emit(newEmployee);
-
+    const editedEmployee: Employee = Object.assign({}, this.employee);
+    this.onSubmit.emit(editedEmployee);
     this.hide();
   }
 

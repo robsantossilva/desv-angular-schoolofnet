@@ -5,19 +5,25 @@ import { EmployeeService } from './employee.service';
   selector: '[salaryColor]',
 })
 export class SalaryColorDirective {
-  @Input()
-  salaryColor: any;
-
   constructor(
     private element: ElementRef,
     private employeeService: EmployeeService
   ) {
-    setTimeout(() => {
-      const nativeElement: HTMLElement = this.element.nativeElement;
-      const salary = parseFloat(this.salaryColor);
-      nativeElement.style.color = employeeService.shouldReceiveBonus(salary)
-        ? 'red'
-        : 'green';
-    }, 500);
+    // setTimeout(() => {
+    //   const nativeElement: HTMLElement = this.element.nativeElement;
+    //   const salary = parseFloat(this.salaryColor);
+    //   nativeElement.style.color = employeeService.shouldReceiveBonus(salary)
+    //     ? 'red'
+    //     : 'green';
+    // }, 500);
+  }
+
+  @Input() set salaryColor(value: string) {
+    const nativeElement: HTMLElement = this.element.nativeElement;
+    nativeElement.style.color = this.employeeService.shouldReceiveBonus(
+      parseFloat(value)
+    )
+      ? 'red'
+      : 'green';
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { EmployeeDeleteModelComponent } from '../employee-delete-model/employee-delete-model.component';
+import { EmployeeEditModelComponent } from '../employee-edit-model/employee-edit-model.component';
 import { EmployeeNewModelComponent } from '../employee-new-model/employee-new-model.component';
 import { Employee, EmployeeService } from '../employee.service';
 
@@ -8,15 +10,56 @@ import { Employee, EmployeeService } from '../employee.service';
   styleUrls: ['./employee-list.component.css'],
 })
 export class EmployeeListComponent implements OnInit {
+  employee!: Employee;
+  employeeToEdit!: Employee;
+  employeeToDelete!: Employee;
+  showMessageSuccess: boolean = false;
+
   @ViewChild(EmployeeNewModelComponent) //get element reference from the component
   employeeNewModel!: EmployeeNewModelComponent;
+
+  @ViewChild(EmployeeEditModelComponent) //get element reference from the component
+  employeeEditModel!: EmployeeEditModelComponent;
+
+  @ViewChild(EmployeeDeleteModelComponent) //get element reference from the component
+  employeeDeleteModel!: EmployeeDeleteModelComponent;
 
   constructor(public employeeService: EmployeeService) {}
 
   ngOnInit(): void {}
 
-  openModal(): void {
+  openNewModal(): void {
     this.employeeNewModel.show();
+  }
+
+  openEditModal(employee: Employee): void {
+    this.employeeToEdit = employee;
+    this.employeeEditModel.show();
+  }
+
+  openDeleteModal(employee: Employee): void {
+    this.employeeToDelete = employee;
+    this.employeeDeleteModel.show();
+  }
+
+  onNewEmployee(employee: Employee): void {
+    this.employee = employee;
+    this.showMessageSuccess = true;
+
+    setTimeout(() => {
+      this.showMessageSuccess = false;
+    }, 3000);
+  }
+
+  onEditEmployee(employee: Employee): void {
+    //this.employee = employee;
+    console.log(employee);
+    this.employeeEditModel.hide();
+  }
+
+  onDeleteEmployee(employee: Employee): void {
+    console.log(employee);
+    this.employeeDeleteModel.hide();
   }
 
   // getSalaryColor(employee: Employee): string | null {

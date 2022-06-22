@@ -28,6 +28,11 @@ export class EmployeeService {
     });
   }
 
+  deleteEmployee(employee: Employee): void {
+    const index = this.employees.indexOf(employee);
+    this.employees.splice(index, 1);
+  }
+
   shouldReceiveBonus(salary: number): boolean {
     return salary < 1000;
   }
